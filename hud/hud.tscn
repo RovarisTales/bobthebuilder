@@ -1,0 +1,108 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqitdl1eh4h7m"]
+
+[ext_resource type="Script" path="res://hud/main_menu.gd" id="1_xcxoq"]
+[ext_resource type="Texture2D" uid="uid://0xognk2jpweo" path="res://icon.svg" id="2_hri2u"]
+[ext_resource type="Theme" uid="uid://2mbwcaqjb88j" path="res://assets/start.tres" id="3_gu5ei"]
+[ext_resource type="Script" path="res://hud/control.gd" id="4_r2doo"]
+[ext_resource type="Theme" uid="uid://pdpxbq8lv18f" path="res://assets/build.tres" id="5_pqrno"]
+[ext_resource type="Texture2D" uid="uid://cg6jvyxcqghrs" path="res://assets/plusone.png" id="6_vgaq1"]
+[ext_resource type="Texture2D" uid="uid://bik1r3h55joav" path="res://assets/plusdamage.png" id="7_iob0m"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Main menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_xcxoq")
+
+[node name="TextureRect" type="TextureRect" parent="Main menu"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_hri2u")
+
+[node name="Label" type="Label" parent="Main menu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -290.5
+offset_right = 290.5
+offset_bottom = 175.0
+grow_horizontal = 2
+text = "BOB THE BUILDER
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Main menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.532
+anchor_right = 0.5
+anchor_bottom = 0.532
+offset_left = -116.0
+offset_top = -111.56
+offset_right = 36.0001
+offset_bottom = 27.44
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+theme = ExtResource("3_gu5ei")
+
+[node name="GameHud" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("4_r2doo")
+
+[node name="Button" type="Button" parent="GameHud"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.927
+anchor_top = 0.867
+anchor_right = 0.927
+anchor_bottom = 0.867
+offset_left = -99.8401
+offset_top = -46.36
+offset_right = 97.1599
+offset_bottom = 138.64
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("5_pqrno")
+
+[node name="Button3" type="Button" parent="GameHud"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.159
+anchor_top = 0.867
+anchor_right = 0.159
+anchor_bottom = 0.867
+offset_left = -25.28
+offset_top = -46.36
+offset_right = 171.72
+offset_bottom = 138.64
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("5_pqrno")
+
+[node name="TextureRect" type="TextureRect" parent="GameHud"]
+layout_mode = 0
+offset_left = 1530.0
+offset_top = 878.0
+offset_right = 1657.0
+offset_bottom = 1005.0
+texture = ExtResource("6_vgaq1")
+
+[node name="TextureRect2" type="TextureRect" parent="GameHud"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 878.0
+offset_right = 257.0
+offset_bottom = 1005.0
+texture = ExtResource("7_iob0m")
+
+[connection signal="pressed" from="Main menu/Button" to="Main menu" method="_on_button_pressed"]
