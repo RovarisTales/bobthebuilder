@@ -78,10 +78,6 @@ layout_mode = 2
 texture = ExtResource("6_vgaq1")
 expand_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="GameHud/BlockUpgradeContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 70
-
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="GameHud/BlockUpgradeContainer"]
 layout_mode = 2
 stretch_mode = 3
@@ -90,11 +86,8 @@ stretch_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5_pqrno")
+text = "                                 "
 expand_icon = true
-
-[node name="MarginContainer2" type="MarginContainer" parent="GameHud/BlockUpgradeContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 70
 
 [node name="coinBuild" type="TextureRect" parent="GameHud/BlockUpgradeContainer"]
 layout_mode = 2
@@ -123,10 +116,6 @@ layout_mode = 2
 texture = ExtResource("7_iob0m")
 expand_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="GameHud/DamageUpgradeContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 70
-
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="GameHud/DamageUpgradeContainer"]
 layout_mode = 2
 stretch_mode = 3
@@ -134,10 +123,7 @@ stretch_mode = 3
 [node name="DamageButton" type="Button" parent="GameHud/DamageUpgradeContainer/AspectRatioContainer"]
 layout_mode = 2
 theme = ExtResource("5_pqrno")
-
-[node name="MarginContainer2" type="MarginContainer" parent="GameHud/DamageUpgradeContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 70
+text = "                                 "
 
 [node name="coinBuild2" type="TextureRect" parent="GameHud/DamageUpgradeContainer"]
 layout_mode = 2
@@ -154,9 +140,10 @@ label_settings = ExtResource("8_wln5n")
 
 [node name="CoinsContainer" type="HBoxContainer" parent="GameHud"]
 layout_mode = 0
-offset_left = 1647.0
-offset_right = 1921.0
-offset_bottom = 131.0
+offset_left = 1605.0
+offset_top = 4.0
+offset_right = 1879.0
+offset_bottom = 135.0
 
 [node name="TextureRect" type="TextureRect" parent="GameHud/CoinsContainer"]
 layout_mode = 2
@@ -169,12 +156,29 @@ label_settings = ExtResource("8_wln5n")
 
 [node name="StartWaveButton" type="Button" parent="GameHud"]
 layout_mode = 0
-offset_left = 1653.0
-offset_top = 416.0
-offset_right = 1781.0
-offset_bottom = 544.0
+offset_left = 1611.0
+offset_top = 414.0
+offset_right = 1739.0
+offset_bottom = 542.0
 theme = ExtResource("3_gu5ei")
+
+[node name="HealthContainer" type="HBoxContainer" parent="GameHud"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 15.0
+offset_right = 436.0
+offset_bottom = 143.0
+
+[node name="TextureRect" type="TextureRect" parent="GameHud/HealthContainer"]
+layout_mode = 2
+texture = ExtResource("2_hri2u")
+
+[node name="HealthLabel" type="Label" parent="GameHud/HealthContainer"]
+layout_mode = 2
+text = "test"
+label_settings = ExtResource("8_wln5n")
 
 [connection signal="pressed" from="Main menu/Button" to="Main menu" method="_on_button_pressed"]
 [connection signal="pressed" from="GameHud/BlockUpgradeContainer/AspectRatioContainer/BuildButton" to="GameHud" method="_on_build_button_pressed"]
+[connection signal="pressed" from="GameHud/DamageUpgradeContainer/AspectRatioContainer/DamageButton" to="GameHud" method="_on_damage_button_pressed"]
 [connection signal="pressed" from="GameHud/StartWaveButton" to="GameHud" method="_on_start_wave_button_pressed"]
