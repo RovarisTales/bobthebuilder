@@ -9,6 +9,7 @@ var speed: float = 200
 
 func _ready() -> void:
 	$AttackTimer.start()
+	SignalBus.end_wave.connect(end_wave)
 
 func _process(delta: float) -> void:
 
@@ -19,10 +20,15 @@ func _process(delta: float) -> void:
 func _on_attack_timer_timeout() -> void:
 	var projectile = attack_scene.instantiate()
 	
-	add_child(projectile)
-	$AttackTimer.wait_time = randf_range(1,2)
+	projectile.position = position
+	
+	get_parent().add_child(projectile)
+	$AttackTimer.wait_time = randf_range(0.1,0.2)
 	
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
+
+func end_wave() -> void:
+	$AttackTimer.stop()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqitdl1eh4h7m"]
+[gd_scene load_steps=14 format=3 uid="uid://bqitdl1eh4h7m"]
 
 [ext_resource type="Script" path="res://hud/main_menu.gd" id="1_xcxoq"]
 [ext_resource type="Texture2D" uid="uid://0xognk2jpweo" path="res://icon.svg" id="2_hri2u"]
@@ -6,9 +6,13 @@
 [ext_resource type="Script" path="res://hud/game_hud.gd" id="4_r2doo"]
 [ext_resource type="Theme" uid="uid://pdpxbq8lv18f" path="res://assets/build.tres" id="5_pqrno"]
 [ext_resource type="Texture2D" uid="uid://cg6jvyxcqghrs" path="res://assets/plusone.png" id="6_vgaq1"]
+[ext_resource type="Script" path="res://hud/build_button.gd" id="7_fotr8"]
 [ext_resource type="Texture2D" uid="uid://bik1r3h55joav" path="res://assets/plusdamage.png" id="7_iob0m"]
 [ext_resource type="LabelSettings" uid="uid://gmgwfwv447cu" path="res://assets/hud.tres" id="8_wln5n"]
 [ext_resource type="Texture2D" uid="uid://bok0q2gtv2k6g" path="res://assets/coin.png" id="8_yb605"]
+[ext_resource type="Script" path="res://hud/damage_button.gd" id="11_16l53"]
+[ext_resource type="Script" path="res://hud/damage_icon.gd" id="11_ki821"]
+[ext_resource type="Script" path="res://hud/start_wave_button.gd" id="12_iv2hb"]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -88,6 +92,7 @@ size_flags_horizontal = 3
 theme = ExtResource("5_pqrno")
 text = "                                 "
 expand_icon = true
+script = ExtResource("7_fotr8")
 
 [node name="coinBuild" type="TextureRect" parent="GameHud/BlockUpgradeContainer"]
 layout_mode = 2
@@ -115,6 +120,7 @@ alignment = 1
 layout_mode = 2
 texture = ExtResource("7_iob0m")
 expand_mode = 2
+script = ExtResource("11_ki821")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="GameHud/DamageUpgradeContainer"]
 layout_mode = 2
@@ -124,6 +130,7 @@ stretch_mode = 3
 layout_mode = 2
 theme = ExtResource("5_pqrno")
 text = "                                 "
+script = ExtResource("11_16l53")
 
 [node name="coinBuild2" type="TextureRect" parent="GameHud/DamageUpgradeContainer"]
 layout_mode = 2
@@ -161,6 +168,7 @@ offset_top = 414.0
 offset_right = 1739.0
 offset_bottom = 542.0
 theme = ExtResource("3_gu5ei")
+script = ExtResource("12_iv2hb")
 
 [node name="HealthContainer" type="HBoxContainer" parent="GameHud"]
 layout_mode = 0

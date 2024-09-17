@@ -4,13 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://0xognk2jpweo" path="res://icon.svg" id="2_x1wkn"]
 [ext_resource type="PackedScene" uid="uid://tgdvlujbqh3n" path="res://level/tower/attacks.tscn" id="2_ycfj7"]
 
-[node name="Turret" type="Node2D"]
+[node name="Turret" type="Node2D" groups=["turrets"]]
 script = ExtResource("1_dcy0v")
 attacks = ExtResource("2_ycfj7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.38419e-07, 0)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_x1wkn")
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

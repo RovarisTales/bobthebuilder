@@ -1,10 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://ibqs4e8ghkte"]
+[gd_scene load_steps=4 format=3 uid="uid://ibqs4e8ghkte"]
 
 [ext_resource type="PackedScene" uid="uid://bqitdl1eh4h7m" path="res://hud/hud.tscn" id="1_qpqx4"]
 [ext_resource type="PackedScene" uid="uid://bxcf5ciarw8ur" path="res://level/Map.tscn" id="2_1crbs"]
+[ext_resource type="Script" path="res://camera_2d.gd" id="3_o8ov8"]
 
 [node name="Main" type="Node"]
 
 [node name="HUD" parent="." instance=ExtResource("1_qpqx4")]
 
 [node name="Map" parent="." instance=ExtResource("2_1crbs")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 540)
+limit_left = 0
+limit_right = 1920
+script = ExtResource("3_o8ov8")

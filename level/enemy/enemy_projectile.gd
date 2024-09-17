@@ -11,3 +11,18 @@ func _process(delta: float) -> void:
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
+
+
+func _on_area_entered(area: Area2D) -> void:
+	#print(area.get_groups())
+	if area.get_parent().is_in_group("turret_attacks"):
+		GlobalVars.coins += 5
+		SignalBus.update_coins.emit()
+		area.get_parent().queue_free()
+		queue_free()
+	elif area.is_in_group("projectiles") or area.is_in_group("exited"):
+		pass
+	else:
+		GlobalVars.health -= damage
+		SignalBus.take_damage.emit()
+		queue_free()
