@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bqitdl1eh4h7m"]
+[gd_scene load_steps=15 format=3 uid="uid://bqitdl1eh4h7m"]
 
 [ext_resource type="Script" path="res://hud/main_menu.gd" id="1_xcxoq"]
 [ext_resource type="Texture2D" uid="uid://0xognk2jpweo" path="res://icon.svg" id="2_hri2u"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://hud/damage_button.gd" id="11_16l53"]
 [ext_resource type="Script" path="res://hud/damage_icon.gd" id="11_ki821"]
 [ext_resource type="Script" path="res://hud/start_wave_button.gd" id="12_iv2hb"]
+[ext_resource type="Script" path="res://hud/turret_add_icon.gd" id="13_iffi2"]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -107,7 +108,7 @@ theme_override_constants/margin_left = 10
 layout_mode = 2
 label_settings = ExtResource("8_wln5n")
 
-[node name="DamageUpgradeContainer" type="HBoxContainer" parent="GameHud"]
+[node name="CreateTurret" type="HBoxContainer" parent="GameHud"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
 offset_left = 100.0
@@ -116,32 +117,70 @@ offset_right = 538.0
 offset_bottom = 1031.0
 alignment = 1
 
-[node name="DamageIcon" type="TextureRect" parent="GameHud/DamageUpgradeContainer"]
+[node name="DamageIcon" type="TextureRect" parent="GameHud/CreateTurret"]
 layout_mode = 2
 texture = ExtResource("7_iob0m")
 expand_mode = 2
 script = ExtResource("11_ki821")
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="GameHud/DamageUpgradeContainer"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="GameHud/CreateTurret"]
 layout_mode = 2
 stretch_mode = 3
 
-[node name="DamageButton" type="Button" parent="GameHud/DamageUpgradeContainer/AspectRatioContainer"]
+[node name="DamageButton" type="Button" parent="GameHud/CreateTurret/AspectRatioContainer"]
 layout_mode = 2
 theme = ExtResource("5_pqrno")
 text = "                                 "
 script = ExtResource("11_16l53")
 
-[node name="coinBuild2" type="TextureRect" parent="GameHud/DamageUpgradeContainer"]
+[node name="coinBuild2" type="TextureRect" parent="GameHud/CreateTurret"]
 layout_mode = 2
 texture = ExtResource("8_yb605")
 expand_mode = 2
 
-[node name="MarginContainer3" type="MarginContainer" parent="GameHud/DamageUpgradeContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="GameHud/CreateTurret"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 
-[node name="PriceAttack" type="Label" parent="GameHud/DamageUpgradeContainer"]
+[node name="PriceAttack" type="Label" parent="GameHud/CreateTurret"]
+layout_mode = 2
+label_settings = ExtResource("8_wln5n")
+
+[node name="UpgradeTurret" type="HBoxContainer" parent="GameHud"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = 710.0
+offset_top = 890.0
+offset_right = 1157.0
+offset_bottom = 1031.0
+alignment = 1
+
+[node name="TurretAddIcon" type="TextureRect" parent="GameHud/UpgradeTurret"]
+layout_mode = 2
+texture = ExtResource("7_iob0m")
+expand_mode = 2
+script = ExtResource("13_iffi2")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="GameHud/UpgradeTurret"]
+layout_mode = 2
+stretch_mode = 3
+
+[node name="DamageButton" type="Button" parent="GameHud/UpgradeTurret/AspectRatioContainer"]
+layout_mode = 2
+theme = ExtResource("5_pqrno")
+text = "                                 "
+script = ExtResource("11_16l53")
+
+[node name="coinBuild2" type="TextureRect" parent="GameHud/UpgradeTurret"]
+layout_mode = 2
+texture = ExtResource("8_yb605")
+expand_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="GameHud/UpgradeTurret"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="PriceAttack" type="Label" parent="GameHud/UpgradeTurret"]
 layout_mode = 2
 label_settings = ExtResource("8_wln5n")
 
@@ -188,5 +227,5 @@ label_settings = ExtResource("8_wln5n")
 
 [connection signal="pressed" from="Main menu/Button" to="Main menu" method="_on_button_pressed"]
 [connection signal="pressed" from="GameHud/BlockUpgradeContainer/AspectRatioContainer/BuildButton" to="GameHud" method="_on_build_button_pressed"]
-[connection signal="pressed" from="GameHud/DamageUpgradeContainer/AspectRatioContainer/DamageButton" to="GameHud" method="_on_damage_button_pressed"]
+[connection signal="pressed" from="GameHud/CreateTurret/AspectRatioContainer/DamageButton" to="GameHud" method="_on_damage_button_pressed"]
 [connection signal="pressed" from="GameHud/StartWaveButton" to="GameHud" method="_on_start_wave_button_pressed"]

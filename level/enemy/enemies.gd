@@ -1,14 +1,14 @@
 extends Node2D
 
 @export var attack_scene: PackedScene
-var attack_speed: float
+var attack_speed:= 1
 var health: int
 var damage: int
-var speed: float = 200
+var speed: float
 
 
 func _ready() -> void:
-	$AttackTimer.start()
+	$AttackTimer.start(randf_range(attack_speed - 0.2, attack_speed + 0.2))
 	SignalBus.end_wave.connect(end_wave)
 
 func _process(delta: float) -> void:
@@ -18,12 +18,13 @@ func _process(delta: float) -> void:
 
 
 func _on_attack_timer_timeout() -> void:
+	
 	var projectile = attack_scene.instantiate()
 	
 	projectile.position = position
 	
 	get_parent().add_child(projectile)
-	$AttackTimer.wait_time = randf_range(0.1,0.2)
+	
 	
 
 

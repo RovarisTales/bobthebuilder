@@ -11,6 +11,7 @@ script = ExtResource("1_p2rv6")
 turrets = ExtResource("2_6ev6m")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -2)

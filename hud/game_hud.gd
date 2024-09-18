@@ -9,7 +9,7 @@ func _ready() -> void:
 	SignalBus.update_coins.connect(update_coin_hud)
 	SignalBus.take_damage.connect(update_health)
 	$BlockUpgradeContainer/PriceBlock.text = str(block_price)
-	$DamageUpgradeContainer/PriceAttack.text = str(attack_price)
+	$CreateTurret/PriceAttack.text = str(attack_price)
 	$CoinsContainer/CoinLabel.text = str(GlobalVars.coins)
 	$HealthContainer/HealthLabel.text = str(GlobalVars.health)
 

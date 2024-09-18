@@ -4,7 +4,7 @@ var target_loc
 var target
 var direction_vector
 
-var speed = 5000
+var speed = 3000
 
 func _ready() -> void:
 
