@@ -8,7 +8,7 @@ var speed: float
 
 
 func _ready() -> void:
-	$AttackTimer.start(randf_range(attack_speed - 0.2, attack_speed + 0.2))
+	$AttackTimer.start(randf_range(0.1, 0.2))
 	SignalBus.end_wave.connect(end_wave)
 
 func _process(delta: float) -> void:
@@ -33,3 +33,8 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func end_wave() -> void:
 	$AttackTimer.stop()
+	var tween = create_tween()
+	
+	tween.tween_property(self, "modulate", Color.TRANSPARENT, 1.0)
+	await tween.finished
+	queue_free()

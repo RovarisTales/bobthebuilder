@@ -11,3 +11,6 @@ func build() -> void:
 		for j in range(45):
 			set_cell(GlobalVars.current_height + Vector2i(j,-i), 0, Vector2i(0,0), 0)
 	GlobalVars.current_height.y -= 4
+	if GlobalVars.current_height.y < -30:
+		SignalBus.win_game.emit()
+		

@@ -16,19 +16,20 @@ func _ready() -> void:
 	SignalBus.start_game.connect(start_game)
 	SignalBus.start_wave.connect(start_wave)
 	SignalBus.build_block.connect(move_up)
+	SignalBus.game_over.connect(game_over)
+	SignalBus.win_game.connect(win_game)
 	spawn_rate = pow(DECAY_RATE, (-wave_number + 3)/5 )
-	print(spawn_rate)
 
 
 func start_game() -> void:
 	show()
 
 func _process(delta: float) -> void:
-	$Label.text = str(int($WaveTimer.time_left))
+	$WaveTimeLabel.text = str(int($WaveTimer.time_left))
 
 func start_wave() -> void:
-	$WaveTimer.start(wave_number*time_to_survive)
-	$EnemyTimer.start(randf_range(spawn_rate-diff, spawn_rate + diff))
+	$WaveTimer.start(time_to_survive)
+	$EnemyTimer.start(randf_range(0.1, 0.11))
 	
 
 func _on_enemy_timer_timeout() -> void:
@@ -43,13 +44,18 @@ func _on_enemy_timer_timeout() -> void:
 
 func _on_wave_timer_timeout() -> void:
 	wave_number += 1
-	$Label.text = ""
+	$WaveTimeLabel.text = ""
 	$EnemyTimer.stop()
 	SignalBus.end_wave.emit()
 	time_to_survive *= 1.1
 	spawn_rate = pow(DECAY_RATE, (-wave_number + 3)/5 )
-	print(spawn_rate)
-
+	
 func move_up() -> void:
 
 	height += 46
+
+func game_over() -> void:
+	hide()
+	
+func win_game() -> void:
+	print("congratz you won")

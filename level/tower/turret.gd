@@ -3,16 +3,15 @@ extends Node2D
 @export var attacks: PackedScene
 var attack_speed:= 1.0
 var can_attack := true
-var wave_ended := false
+var upgrade_price = 501
 
 
 func _ready() -> void:
 	SignalBus.start_wave.connect(start_wave)
-	SignalBus.end_wave.connect(end_wave)
+	$CanvasLayer.offset = global_position
 	
 func start_wave() -> void:
 	$Timer.start(attack_speed)
-	wave_ended = false
 
 func _process(delta: float) -> void:
 	
@@ -20,8 +19,9 @@ func _process(delta: float) -> void:
 		pass
 	elif get_tree().get_nodes_in_group("projectiles").size() > 0:
 		attack()
-	elif wave_ended:
-		$Timer.stop()
+	elif get_tree().get_nodes_in_group("exited").size() > 0:
+		attack_exited()
+	
 
 func _on_timer_timeout() -> void:
 	can_attack = true
@@ -32,5 +32,18 @@ func attack() -> void:
 	add_child(attack)
 	$Timer.start(attack_speed)
 
-func end_wave() -> void:
-	wave_ended = true
+func attack_exited() -> void:
+	can_attack = false
+	var attack = attacks.instantiate()
+	attack.attack_exited = true
+	add_child(attack)
+	$Timer.start(attack_speed)
+
+func _on_button_pressed() -> void:
+	if GlobalVars.coins < upgrade_price:
+		SignalBus.cannot_buy.emit()
+	else:
+		GlobalVars.coins -= upgrade_price
+		SignalBus.update_coins.emit()
+		attack_speed /= 2
+		print(attack_speed)

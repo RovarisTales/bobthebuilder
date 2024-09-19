@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bxcf5ciarw8ur"]
+[gd_scene load_steps=10 format=4 uid="uid://bxcf5ciarw8ur"]
 
 [ext_resource type="Texture2D" uid="uid://bg7jig5y2hoog" path="res://assets/tilemap.png" id="1_8m4rf"]
 [ext_resource type="Script" path="res://level/map.gd" id="1_wne8k"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://level/tile_map_layer.gd" id="4_i3lpc"]
 [ext_resource type="PackedScene" uid="uid://c3a38imxjydcn" path="res://level/tower/tower.tscn" id="4_xutv2"]
 [ext_resource type="LabelSettings" uid="uid://gmgwfwv447cu" path="res://assets/hud.tres" id="5_pafy3"]
+[ext_resource type="Script" path="res://level/wave_time_label.gd" id="7_o0nxn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x40f4"]
 texture = ExtResource("1_8m4rf")
@@ -52,12 +53,13 @@ position = Vector2(936, 852)
 [node name="WaveTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Label" type="Label" parent="."]
+[node name="WaveTimeLabel" type="Label" parent="."]
 offset_left = 26.0
 offset_top = 404.0
 offset_right = 308.0
 offset_bottom = 517.0
 label_settings = ExtResource("5_pafy3")
+script = ExtResource("7_o0nxn")
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
