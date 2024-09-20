@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://bqitdl1eh4h7m"]
+[gd_scene load_steps=15 format=3 uid="uid://bqitdl1eh4h7m"]
 
+[ext_resource type="Script" path="res://hud/hud.gd" id="1_2mdw4"]
 [ext_resource type="Script" path="res://hud/main_menu.gd" id="1_xcxoq"]
 [ext_resource type="Texture2D" uid="uid://0xognk2jpweo" path="res://icon.svg" id="2_hri2u"]
 [ext_resource type="Theme" uid="uid://2mbwcaqjb88j" path="res://assets/start.tres" id="3_gu5ei"]
@@ -15,6 +16,7 @@
 [ext_resource type="Script" path="res://hud/start_wave_button.gd" id="12_iv2hb"]
 
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_2mdw4")
 
 [node name="Main menu" type="Control" parent="."]
 visible = false
@@ -147,10 +149,10 @@ label_settings = ExtResource("8_wln5n")
 
 [node name="CoinsContainer" type="HBoxContainer" parent="GameHud"]
 layout_mode = 0
-offset_left = 1605.0
-offset_top = 4.0
-offset_right = 1879.0
-offset_bottom = 135.0
+offset_left = 1469.0
+offset_top = 10.0
+offset_right = 1743.0
+offset_bottom = 141.0
 
 [node name="TextureRect" type="TextureRect" parent="GameHud/CoinsContainer"]
 layout_mode = 2
@@ -185,6 +187,18 @@ texture = ExtResource("2_hri2u")
 layout_mode = 2
 text = "test"
 label_settings = ExtResource("8_wln5n")
+
+[node name="Win" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Lose" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="pressed" from="Main menu/Button" to="Main menu" method="_on_button_pressed"]
 [connection signal="pressed" from="GameHud/BlockUpgradeContainer/AspectRatioContainer/BuildButton" to="GameHud" method="_on_build_button_pressed"]

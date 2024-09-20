@@ -18,7 +18,7 @@ func build_block() -> void :
 	$Area2D/CollisionShape2D.shape.size.y += 64
 	for turret in get_tree().get_nodes_in_group("turrets"):
 		turret.translate(Vector2(0,-64))
-	GlobalVars.health += 100 * pow(height,1.3)
+	
 	
 	
 func build_weapon() -> void :

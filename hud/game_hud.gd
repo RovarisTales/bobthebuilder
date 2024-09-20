@@ -1,8 +1,8 @@
 extends Control
 
-var block_price = 5
-var attack_price = 1
-var upgrade_price = 1
+var block_price = 50
+var attack_price = 5
+var height := 0
 
 func _ready() -> void:
 	hide()
@@ -12,7 +12,7 @@ func _ready() -> void:
 	SignalBus.cannot_buy.connect(display_warning)
 	$BlockUpgradeContainer/PriceBlock.text = str(block_price)
 	$CreateTurret/PriceAttack.text = str(attack_price)
-	$CoinsContainer/CoinLabel.text = str(GlobalVars.coins)
+	$CoinsContainer/CoinLabel.text = format_custom(GlobalVars.coins)
 	$HealthContainer/HealthLabel.text = str(GlobalVars.health)
 
 func start_game() -> void:
@@ -21,14 +21,19 @@ func start_game() -> void:
 
 func _on_build_button_pressed() -> void:
 	if GlobalVars.coins < block_price:
-		print("you cant buy this you dummy")
+		SignalBus.cannot_buy.emit()
 	else:
+		height += 1
 		GlobalVars.coins -= block_price
 		SignalBus.build_block.emit()
 		SignalBus.update_coins.emit()
+		block_price *= 10
+		$BlockUpgradeContainer/PriceBlock.text = str(block_price)
+		GlobalVars.health += 100 * pow(height,1.3)
+		update_health()
 
 func update_coin_hud() -> void:
-	$CoinsContainer/CoinLabel.text = str(GlobalVars.coins)
+	$CoinsContainer/CoinLabel.text = format_custom(GlobalVars.coins)
 
 
 func _on_start_wave_button_pressed() -> void:
@@ -37,29 +42,36 @@ func _on_start_wave_button_pressed() -> void:
 
 func _on_damage_button_pressed() -> void:
 	if GlobalVars.coins < attack_price:
-		print("you cant buy this you dummy")
+		SignalBus.cannot_buy.emit()
 	else:
 		GlobalVars.coins -= attack_price
 		SignalBus.build_weapon.emit()
 		SignalBus.update_coins.emit()
+		attack_price *= 5
+		$CreateTurret/PriceAttack.text = str(attack_price)
 
 func update_health() -> void :
 	$HealthContainer/HealthLabel.text = str(GlobalVars.health)
 
 
-func _on_upgrade_turret_button_pressed() -> void:
-	if GlobalVars.coins < upgrade_price:
-		print("you cant buy this you dummy")
-	else:
-		GlobalVars.coins -= upgrade_price
-		SignalBus.upgrade_turret.emit()
-		SignalBus.update_coins.emit()
-
 func display_warning() -> void:
 	var label = Label.new()
 	label.label_settings = load("res://assets/hud.tres")
 	label.text ="CANT BUY THIS!!!!!"
-	label.global_position = Vector2(900, 500)
+	label.global_position = Vector2(680, 400)
 	label.z_index = 100
 	add_child(label)
-	get_tree().create_tween().tween_property(label, "modulate", Color.TRANSPARENT, 2.0)
+	var tween_label = get_tree().create_tween()
+	tween_label.tween_property(label, "modulate", Color.TRANSPARENT, 2.0)
+	await tween_label.finished
+	label.queue_free()
+
+func format_custom(formater) -> String:
+	var iterator = float(formater)
+	var count = 0
+	while iterator > 1000:
+		iterator /= 1000
+		count += 1
+	if count > 0:
+		return "%7.2f %s" % [iterator, String.chr(64 + count)]
+	return str(formater)

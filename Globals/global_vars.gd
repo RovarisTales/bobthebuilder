@@ -1,6 +1,6 @@
 extends Node
 
-var coins:int = 500
+var coins:int = 500000
 
 var health: int = 100
 

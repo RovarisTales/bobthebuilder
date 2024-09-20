@@ -4,8 +4,9 @@ var target_loc
 var target
 var direction_vector
 var attack_exited = false
+var multipliyer
 
-var speed = 3000
+var speed: float
 
 func _ready() -> void:
 	if !attack_exited:
@@ -35,7 +36,6 @@ func select_target() -> void:
 func select_exited() -> void:
 	target = get_tree().get_nodes_in_group("exited").pop_front()
 	if target != null:
-		target.remove_from_group("exited")
 		target_loc = target.global_position
 		direction_vector = global_position.direction_to(target_loc)
 	else :

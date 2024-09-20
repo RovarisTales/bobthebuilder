@@ -23,7 +23,7 @@ layer = 5
 follow_viewport_enabled = true
 script = ExtResource("4_qewwj")
 
-[node name="Upgrade" type="Button" parent="CanvasLayer"]
+[node name="VelocityUpgrade" type="Button" parent="CanvasLayer"]
 z_index = 10
 offset_left = 4.0
 offset_top = -23.0
@@ -32,5 +32,23 @@ offset_bottom = -7.0
 theme_override_font_sizes/font_size = 5
 text = "UPGRADE"
 
+[node name="AttackSpeedUpgrade" type="Button" parent="CanvasLayer"]
+z_index = 10
+offset_left = -36.0
+offset_top = -24.0
+offset_right = -4.0
+offset_bottom = -8.0
+theme_override_font_sizes/font_size = 5
+text = "UPGRADE"
+
+[node name="MultipliyerUpgrade" type="Button" parent="CanvasLayer"]
+offset_left = -36.0
+offset_top = 6.0
+offset_right = 37.0
+offset_bottom = 37.0
+text = "upgrade"
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="pressed" from="CanvasLayer/Upgrade" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VelocityUpgrade" to="." method="_on_velocity_upgrade_pressed"]
+[connection signal="pressed" from="CanvasLayer/AttackSpeedUpgrade" to="." method="_on_attack_speed_upgrade_pressed"]
+[connection signal="pressed" from="CanvasLayer/MultipliyerUpgrade" to="." method="_on_multipliyer_upgrade_pressed"]

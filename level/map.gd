@@ -7,6 +7,7 @@ const DECAY_RATE := 3.0
 var wave_number := 1.0
 var time_to_survive: float
 var spawn_rate :float
+@onready var attack_speed := 2
 var height := 0
 var diff = 0.25
 
@@ -16,9 +17,7 @@ func _ready() -> void:
 	SignalBus.start_game.connect(start_game)
 	SignalBus.start_wave.connect(start_wave)
 	SignalBus.build_block.connect(move_up)
-	SignalBus.game_over.connect(game_over)
-	SignalBus.win_game.connect(win_game)
-	spawn_rate = pow(DECAY_RATE, (-wave_number + 3)/5 )
+	spawn_rate = pow(DECAY_RATE, (-wave_number + 8)/7 )
 
 
 func start_game() -> void:
@@ -29,7 +28,8 @@ func _process(delta: float) -> void:
 
 func start_wave() -> void:
 	$WaveTimer.start(time_to_survive)
-	$EnemyTimer.start(randf_range(0.1, 0.11))
+	$EnemyTimer.start(spawn_rate)
+	_on_enemy_timer_timeout()
 	
 
 func _on_enemy_timer_timeout() -> void:
@@ -37,6 +37,7 @@ func _on_enemy_timer_timeout() -> void:
 	var enemy = enemies_scene.instantiate()
 	var direction = -1 if randf() < 0.5 else 1
 	enemy.speed = direction * randf_range(180,220)
+	enemy.attack_speed = attack_speed
 	enemy.position = Vector2i(0 if direction == 1 else 1920 ,50 - height + randf_range(-30, 40))
 	
 	add_child(enemy)
@@ -48,14 +49,9 @@ func _on_wave_timer_timeout() -> void:
 	$EnemyTimer.stop()
 	SignalBus.end_wave.emit()
 	time_to_survive *= 1.1
-	spawn_rate = pow(DECAY_RATE, (-wave_number + 3)/5 )
+	attack_speed /= 1.1
+	spawn_rate = pow(DECAY_RATE, (-wave_number + 8)/7 )
 	
 func move_up() -> void:
 
 	height += 46
-
-func game_over() -> void:
-	hide()
-	
-func win_game() -> void:
-	print("congratz you won")
